@@ -1,0 +1,60 @@
+﻿Build started 1/10/2025 9:36:21 PM.
+     1>Project "C:\dev_code\opengl\trainig\trainig\trainig.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Resturant.cpp
+         Resturant.cpp
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(160): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(162): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(171): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(177): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(187): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(189): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(198): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(204): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(283): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(285): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(289): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(297): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(299): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(303): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(388): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(389): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(389): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(390): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(390): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(391): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(391): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(392): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(392): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(397): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(397): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(400): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(401): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(401): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(402): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(402): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(403): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(403): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(406): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(406): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(413): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(418): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(419): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(582): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(583): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(584): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\dev_code\opengl\trainig\trainig\resturant.cpp(585): warning C4305: 'argument' : truncation from 'double' to 'float'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\dev_code\opengl\trainig\Debug\trainig.exe" /INCREMENTAL /NOLOGO GLAUX.lib GLU32.lib glut.lib OPENGL32.lib glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\dev_code\opengl\trainig\Debug\trainig.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\dev_code\opengl\trainig\Debug\trainig.lib" /MACHINE:X86 Debug\background.obj
+         Debug\Decore.obj
+         Debug\GLTexture.obj
+         Debug\main.obj
+         Debug\Model_3DS.obj
+         Debug\Resturant.obj
+         Debug\texture.obj
+         trainig.vcxproj -> C:\dev_code\opengl\trainig\Debug\trainig.exe
+     1>Done Building Project "C:\dev_code\opengl\trainig\trainig\trainig.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.82
