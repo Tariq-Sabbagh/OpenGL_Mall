@@ -291,7 +291,7 @@ void Model_3DS::Draw()
 		glScalef(scale, scale, scale);
 
 		// Loop through the objects
-		for (int i = 0; i < numObjects; i++)
+		for (int i = 0; i < 1; i++)
 		{
 			// Enable texture coordiantes, normals, and vertices arrays
 			if (Objects[i].textured)
@@ -396,7 +396,7 @@ void Model_3DS::Draw()
 				}
 			}
 		}
-
+		glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	}
 }

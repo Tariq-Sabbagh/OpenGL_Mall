@@ -9,7 +9,13 @@
 #include "Resturant.h"
 #include "backgorund.h"
 #include "Decore.h"
+#include "display_rectangular_parallelepiped.h"
 #include <math.h>
+#include "mall.h"
+#include "display_library.h"
+#include "ElectronicsStore.h"
+
+#include "mall_lobby.h"
 
 
 HDC			hDC = NULL;		// Private GDI Device Context
@@ -20,56 +26,156 @@ HINSTANCE	hInstance;		// Holds The Instance Of The Application
 bool	keys[256];			// Array Used For The Keyboard Routine
 bool	active = TRUE;		// Window Active Flag Set To TRUE By Default
 bool	fullscreen = FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+bool isNight=false,Ni=false;
 
 LRESULT	CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);	// Declaration For WndProc
 
-Model_3DS* tableModel,*sofaModel;
+Model_3DS* tableModel,*sofaModel,*carModel,*car2Model;
+int pressed,rot=0;
+int grey_wood;
+int light_brown_wood;
+int brown_wood;
+int TV_screen;
+int mobile_screen;
+int laptop_screen;
+int keyboard;
+int grey;
+int black;
+int WallBTexture;int buildingTexture2;
+int electronics_store;
+int buildingNightTexture;
+int upfront, wall, glass, up, floorMall;
+int night1Texture, night2Texture, night3Texture, night4Texture;
+int mallglass;
+int logoMall;
+int wallMall;
+int wooden_bookshelf;
+int library_store;
 
-int floorTexture,wallTexture,groundTexture,doorTexture,grassTexture,glassTexture,wallRe,fixglass,screen,tableTexture,tablelegTexture,chairTexture,fruitcone,fenceTexture,flowresTexture,logoTexture ;
-float i =0.0f, j = 2.0f, k = 70.0f;  
+int frontFacingStep;
+int topFacingStep;
+int sidesImage;
+int fenceImage;
+int whiteMarbleImage;
+int hallFloorImage;
+
+int green_leaves;
+
+int the_grass;
+
+
+int refrigerator ; 
+int refrigerator2 ; 
+int wallELE ; 
+int roofELE ; 
+int airconditioner ; 
+int airconditioner2 ; 
+int washmachine ;
+int washmachine2 ; 
+int SolarPanel ; 
+int solarpanel2 ;
+int dishwasher  ; 
+int dishwasher2  ;
+
+int floorTexture,wallTexture,groundTexture,doorTexture,grassTexture,glassTexture,wallRe,fixglass,screen,tableTexture,tablelegTexture,chairTexture,fruitcone,fenceTexture,flowresTexture,logoTexture,torDeskTexture,deskTexture,sky1Texture,sky2Texture,sky3Texture,sky4Texture,sky5Texture,sidewalkTexture,roadTexture;
+float i =20.0f, j = 0.0f, k = 50.0f;  
 float angle = 4.7f; 
+float pitch = 0.0f;
+float angleSpeed = 0.007f;  
+float moveSpeed = 0.07f;  
+float lx,ly,lz;
 
-float angleSpeed = 0.001f;  
-float moveSpeed = 0.05f;  
 
 bool open=false,lp=false,first=false;
 
 void key(bool* keys)
 {
+    if(keys[VK_LEFT])  
+    {
+        angle -= angleSpeed;  
+    }
+    if(keys[VK_RIGHT])  
+    {
+        angle += angleSpeed;      }
 
-	if(keys['A'])  
-	{
-		angle -= angleSpeed;  
-	}
-	if(keys['D'])  
-	{
-		angle += angleSpeed;  
-	}
+    if(keys['S']) 
+    {
+        i -= moveSpeed * cos(angle); 
+        k -= moveSpeed * sin(angle);
+    }
 
-	if(keys['S']) 
-	{
-		
-		i -= moveSpeed * cos(angle);
-		k -= moveSpeed * sin(angle);
-	}
+    if(keys['W']) 
+    {
+        i += moveSpeed * cos(angle); 
+        k += moveSpeed * sin(angle);
+    }
 
-	if(keys['W']) 
-	{
-		i += moveSpeed * cos(angle);
-		k += moveSpeed * sin(angle);
-	}
+    if (keys[VK_UP]) 
+    {
+        j += moveSpeed; 
+    }    
+    if (keys[VK_DOWN])    
+    {
+        j -= moveSpeed; 
+    }
 
-	if(keys['O']&& !lp)
-  {
-    lp=true;
-    open=!open;
-  }
-  if(!keys['O'])
-  {
-    lp=false;
-  }
+    if(keys['A']) 
+    {
+        i += moveSpeed * sin(angle); 
+        k -= moveSpeed * cos(angle);
+    }
+
+    if(keys['D']) 
+    {
+        i -= moveSpeed * sin(angle); 
+        k += moveSpeed * cos(angle);
+    }
+
+	if (keys['Q']) 
+{
+    pitch += angleSpeed; // زيادة زاوية النظر للأعلى
+    if (pitch > 1.5f) pitch = 1.5f; // تحديد الحد الأقصى للنظر للأعلى (تقريباً 90 درجة)
 }
 
+if (keys['E']) 
+{
+    pitch -= angleSpeed; // تقليل زاوية النظر للأسفل
+    if (pitch < -1.5f) pitch = -1.5f; // تحديد الحد الأدنى للنظر للأسفل (تقريباً -90 درجة)
+}
+
+    if(keys['O']&& !lp)
+    {
+        lp = true;
+        open = !open;
+    }
+    if(!keys['O'])
+    {
+        lp = false;
+    }
+    if (keys['N'] && !Ni)
+    {
+        Ni = true;
+        isNight = !isNight;
+    }    
+    if(!keys['N'])
+    {
+        Ni = false;
+    }
+
+   
+}
+
+
+
+float pos0[4] = { 31,0,-6,1 };
+float diff0[4] = { 1,1,1,1 };
+float spec0[4] = { 1,1,1,1 };
+float amb0[4] = { 0.2,0.2,0.2,1 };
+
+float pos1[4] = { -10.5,5.5,5.5,1 };
+float diff1[4] = { 1,1,1,1 };
+float spec1[4] = { 0.2,0.2,0.2,1 };
+float amb1[4] = { 0.2,0.2,0.2,1 };
 
 
 GLvoid ReSizeGLScene(GLsizei width, GLsizei height)		// Resize And Initialize The GL Window
@@ -100,6 +206,18 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	glEnable(GL_DEPTH_TEST);							// Enables Depth Testing
 	glDepthFunc(GL_LEQUAL);								// The Type Of Depth Testing To Do
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);	// Really Nice Perspective Calculations
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diff0);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, spec0);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, amb0);
+
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diff1);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, spec1);
+	glLightfv(GL_LIGHT1, GL_AMBIENT, amb1);
+
 	glEnable(GL_TEXTURE_2D); 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -120,57 +238,116 @@ int InitGL(GLvoid)										// All Setup For OpenGL Goes Here
 	fruitcone=LoadTexture((char*)"assets/textures/fruit.bmp");
 	flowresTexture=LoadTexture((char*)"assets/textures/flowers.bmp");
 	logoTexture=LoadTexture((char*)"assets/textures/aboabdo1.bmp");
+	deskTexture=LoadTexture((char*)"assets/textures/Gr.bmp");
+	torDeskTexture=LoadTexture((char*)"assets/textures/rrr.bmp");
+	mallglass=LoadTexture((char*)"assets/textures/glass roof.bmp",200);
+	logoMall=LoadTexture((char *)"assets/textures/logoMall.bmp");
+
+	grey_wood = LoadTexture((char *)"assets/textures/grey_wood.bmp");
+  light_brown_wood = LoadTexture((char *)"assets/textures/light_brown_wood.bmp");
+  brown_wood = LoadTexture((char *)"assets/textures/brown_wood.bmp");
+  TV_screen = LoadTexture((char *)"assets/textures/TV_screen.bmp");
+  mobile_screen = LoadTexture((char *)"assets/textures/mobile_screen.bmp");
+  laptop_screen = LoadTexture((char *)"assets/textures/laptop_screen.bmp");
+  keyboard = LoadTexture((char *)"assets/textures/keyboard.bmp");
+  grey = LoadTexture((char *)"assets/textures/grey.bmp");
+  black = LoadTexture((char *)"assets/textures/black.bmp");
+  electronics_store = LoadTexture((char *)"assets/textures/electronics_store.bmp");
+
+  wooden_bookshelf = LoadTexture((char *)"assets/textures/wooden_bookshelf.bmp");
+  library_store = LoadTexture((char *)"assets/textures/library_store.bmp");
+
+  wallMall=LoadTexture((char *)"assets/textures/cone.bmp");
 
 
-	sofaModel = new Model_3DS();
+  sky1Texture = LoadTexture((char *)"assets/textures/sky1.bmp");
+  sky2Texture = LoadTexture((char *)"assets/textures/sky2.bmp");
+  sky3Texture = LoadTexture((char *)"assets/textures/sky3.bmp");
+  sky4Texture = LoadTexture((char *)"assets/textures/sky4.bmp");
+  sky5Texture = LoadTexture((char *)"assets/textures/sky.bmp");	
+  sidewalkTexture=LoadTexture((char *)"assets/textures/ground.bmp");
+  roadTexture=LoadTexture((char *)"assets/textures/road.bmp");
+
+  WallBTexture=LoadTexture((char *)"assets/textures/i.bmp");
+  buildingTexture2=LoadTexture((char *)"assets/textures/f2.bmp");
+
+  buildingNightTexture=LoadTexture((char *)"assets/textures/buildingelec.bmp");
+
+
+	night1Texture = LoadTexture((char*)"assets/textures/night1.bmp");
+	night2Texture = LoadTexture((char*)"assets/textures/night2.bmp");
+	night3Texture = LoadTexture((char*)"assets/textures/night3.bmp");
+	night4Texture = LoadTexture((char*)"assets/textures/night4.bmp");
+
+	 upfront=LoadTexture((char*)"assets/textures/upfront.bmp");
+	 wall=LoadTexture((char*)"assets/textures/wall1.bmp");
+	 glass=LoadTexture((char*)"assets/textures/glass3.bmp");
+	 up=LoadTexture((char*)"assets/textures/up.bmp");
+	floorMall=LoadTexture((char*)"assets/textures/floor1.bmp");
+
+
+	refrigerator = LoadTexture("assets/textures/refrigeration.bmp");
+  refrigerator2 = LoadTexture("assets/textures/refrigeration2.bmp");
+  roofELE= LoadTexture("assets/textures/roof.bmp");  
+  wallELE = LoadTexture("assets/textures/floor.bmp");
+  airconditioner = LoadTexture("assets/textures/airconditioner.bmp");
+  airconditioner2 = LoadTexture("assets/textures/airconditioner2.bmp");
+  washmachine = LoadTexture("assets/textures/washmachine.bmp");
+    washmachine2 = LoadTexture("assets/textures/washmachine2.bmp");
+    SolarPanel = LoadTexture ("assets/textures/solarpanel.bmp");
+    dishwasher = LoadTexture ("assets/textures/dishwasher.bmp");
+    dishwasher2 = LoadTexture ("assets/textures/dishwasher2.bmp");
+    solarpanel2 = LoadTexture ("assets/textures/solarpanel2.bmp");
+
+
+	sidesImage = LoadTexture("assets/textures/top-facing-step.bmp");
+  fenceImage = LoadTexture("assets/textures/darkwood.bmp");
+  hallFloorImage = LoadTexture("assets/textures/beige-marble-tiles.bmp");
+  whiteMarbleImage = LoadTexture("assets/textures/white-marble.bmp");
+  frontFacingStep = LoadTexture("assets/textures/front-facing-step.bmp");
+  topFacingStep = LoadTexture("assets/textures/top-facing-step.bmp");
+  green_leaves = LoadTexture((char *)"assets/textures/green_leaves.bmp",200);
+  the_grass = LoadTexture((char *)"assets/textures/opengl_rt0.bmp");
+
+
+
+
+
+
+
+
+	/*sofaModel = new Model_3DS();
 	sofaModel->Load((char*)"assets/models/sofa/sofa.3DS");
 	sofaModel->Materials[0].tex.LoadBMP((char*)"assets/models/sofa/legs.bmp");
 	sofaModel->Materials[1].tex.LoadBMP((char*)"assets/models/sofa/leather.bmp");
 	sofaModel->Materials[2].tex.LoadBMP((char*)"assets/models/sofa/buttons.bmp");
 
-	sofaModel->scale = 0.07;
+	sofaModel->scale = 0.07;*/
+
+	carModel= new Model_3DS();
+	carModel->Load((char*)"assets/models/car/car.3DS");
+	carModel->Materials[0].tex.LoadBMP((char*)"assets/models/car/car.bmp");
+	carModel->scale=0.1;
+	carModel->rot.y = 0;
+	carModel->pos.x = 7;
+	carModel->pos.y = 1.6;
+	carModel->pos.z = -10;
+
+	car2Model= new Model_3DS();
+	car2Model->Load((char*)"assets/models/car/car.3DS");
+	car2Model->Materials[0].tex.LoadBMP((char*)"assets/models/car/car.bmp");
+	car2Model->scale=0.1;
+	car2Model->rot.y = 180;
+	car2Model->pos.x = 19;
+	car2Model->pos.y = 1.6;
+	car2Model->pos.z = 20;
+
 
 	return TRUE;										// Initialization Went OK
 }
 
 
-void setupLights() {
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
-    glEnable(GL_LIGHT2);
-    glEnable(GL_DEPTH_TEST);
-
-    GLfloat lightAmbient0[] = { 1.2f, 1.2f, 20.2f, 1.0f };
-    GLfloat lightDiffuse0[] = { 1.8f, 1.8f, 20.8f, 1.0f };
-    GLfloat lightPosition0[] = { 2.0f, 10.0f, 10.0f, 1.0f };
-
-    glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient0);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse0);
-    glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
-
-    GLfloat lightAmbient1[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-    GLfloat lightDiffuse1[] = { 0.9f, 0.9f, 0.9f, 1.0f };
-    GLfloat lightPosition1[] = { 0.0f, 5.0f, -5.0f, 1.0f };
-
-    glEnable(GL_LIGHT1);
-    glLightfv(GL_LIGHT1, GL_AMBIENT, lightAmbient1);
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse1);
-    glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
-
-    GLfloat spotDirection[] = { 0.0f, -1.0f, 0.0f };
-    GLfloat spotPosition[] = { 0.0f, 5.0f, 0.0f, 1.0f };
-    GLfloat lightDiffuse2[] = { 1.0f, 1.0f, 0.8f, 1.0f };
-
-    glEnable(GL_LIGHT2);
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, lightDiffuse2);
-    glLightfv(GL_LIGHT2, GL_POSITION, spotPosition);
-    glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, spotDirection);
-    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 45.0f);
-    glLightf(GL_LIGHT2, GL_SPOT_EXPONENT, 5.0f);
-}
-
-
+mall_lobby malllobby;
 
 float door=0;
 int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
@@ -197,28 +374,17 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
       first=false  ;
     }
   }
-
-
-
-//GLfloat glass_diffuse[] = { 0.6, 0.8, 1.0, 0.5 }; 
-//GLfloat glass_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-//GLfloat glass_shininess[] = { 50.0 };
-//
-//glMaterialfv(GL_FRONT, GL_DIFFUSE, glass_diffuse);
-//glMaterialfv(GL_FRONT, GL_SPECULAR, glass_specular);
-//glMaterialfv(GL_FRONT, GL_SHININESS, glass_shininess);
-
-
-
-
-
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
+	
 	key(keys);
 
-	gluLookAt(i, j, k,  
-			  i + cos(angle), j, k + sin(angle),   
-			  0, 1, 0); 
+	  lx = cos(angle) * cos(pitch);
+     ly = sin(pitch);
+     lz = sin(angle) * cos(pitch);
+
+    gluLookAt(i, j, k, i + lx, j + ly, k + lz, 0, 1, 0);
 	glTranslated(0, -2, -10);
 
 	glPushMatrix();
@@ -227,32 +393,122 @@ int DrawGLScene(GLvoid)									// Here's Where We Do All The Drawing
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 	glColor3ub(255,255,255);
 
+	if (isNight) {
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		DrawPlace(grassTexture,night1Texture,night2Texture,night3Texture,night4Texture,night1Texture,sidewalkTexture,roadTexture,WallBTexture,buildingNightTexture,upfront,wall,glass,up,floorMall);
+	}
+	else
+	{
+	glDisable(GL_LIGHTING);
+	glLightfv(GL_LIGHT0, GL_POSITION, pos0);
+	glLightfv(GL_LIGHT1, GL_POSITION, pos1);
+	DrawPlace(grassTexture,sky1Texture,sky2Texture,sky3Texture,sky4Texture,sky5Texture,sidewalkTexture,roadTexture,WallBTexture,buildingTexture2,upfront,wall,glass,up,floorMall);
 
-	DrawPlace(grassTexture,wallTexture);
+	glDisable(GL_TEXTURE);
+	glDisable(GL_TEXTURE_2D);
+	carModel->Draw();
+	car2Model->Draw();
+	}
+
+	//resturant
 	glPushMatrix();
-	//setupLights();
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0);
-	//glEnable(GL_DEPTH_TEST);  // تفعيل اختبار العمق لضمان الترتيب الصحيح للأجسام
-
-	//GLfloat lightAmbient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
-	//GLfloat lightDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	//GLfloat lightPosition[] = { 0.0f, 10.0f, 10.0f, 1.0f };
-
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmbient);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse);
-	//glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
-	DrawResturant( floorTexture , fixglass , glassTexture,  screen, doorTexture , wallRe,chairTexture,tableTexture,tablelegTexture,fruitcone,fenceTexture,flowresTexture,grassTexture,logoTexture );
+	glScaled(0.7,0.7,0.7);
+	glTranslated(-52.5,1.5,-45);
+	DrawResturant( floorTexture , fixglass , glassTexture,  screen, doorTexture , wallRe,chairTexture,tableTexture,tablelegTexture,fruitcone,fenceTexture,flowresTexture,grassTexture,logoTexture ,deskTexture,torDeskTexture);
 	glPushMatrix();
 	glTranslated(-door,0,0);
 	DrawStructureGlass(-7,0,20,0,8,20,glassTexture);
 	glPopMatrix();
+
+	//electronic
+	glPushMatrix();
+	glTranslated(-10,15,18);
+	glScaled(3,3,3);
+	DisplayRectangularParallelepiped displayRectangularParallelepiped;
+    displayRectangularParallelepiped.displayElectronicStore(
+    brown_wood,
+    mobile_screen,
+    laptop_screen,
+    keyboard,
+    TV_screen,
+    grey_wood,
+    grey,
+    black,
+    light_brown_wood,
+    glassTexture,
+    electronics_store
+    );
+
+	glPopMatrix();
+
+
+	//library
+	glPushMatrix();
+	glTranslated(10,16,72);
+	glRotated(180,0,1,0);
+	glScaled(2.9,2.9,2.9);
+	DisplayLibrary displayLibrary;
+   displayLibrary.drawLibraryWithoutPoints(
+    brown_wood,
+    wooden_bookshelf,
+    light_brown_wood,
+    glassTexture,
+    library_store
+    );
+  glPopMatrix();
+
+	glPushMatrix();
+	glScaled(0.05,0.05,0.05);
+	glTranslated(150,100,1750);
+	glRotated(180,0,1,0);
+	drawCube(roofELE, wallELE, refrigerator2,refrigerator, airconditioner2,  airconditioner,  washmachine2, washmachine , SolarPanel, solarpanel2, dishwasher2, dishwasher  );
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glScaled(1.5,1.5,1.5);
+	glTranslated(20,0.5,50);
+	glRotated(90,0,1,0);
+	malllobby.drawMallLobbyWithoutPoints(
+    light_brown_wood,
+    green_leaves,
+    brown_wood,
+    glassTexture,
+    frontFacingStep,
+    topFacingStep,
+    sidesImage,
+    fenceImage,
+    whiteMarbleImage,
+    hallFloorImage,
+    the_grass
+    );
+	glPopMatrix();
+
+
 	glPushMatrix();
 	glTranslated(door,0,0);
 	DrawStructureGlass(0,0,20,7,8,20,glassTexture);
 	glPopMatrix();
-	glDisable(GL_LIGHTING);
 	glPopMatrix();
+
+	drawMall(mallglass,wallMall,logoMall,glassTexture);
+	glPushMatrix();
+	glTranslated(0,0,-door);
+	drawRightDoor(glassTexture);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslated(0,0,door);
+	drawleftDoor(glassTexture);
+	glPopMatrix();
+	glPopMatrix();
+	drawLoby(light_brown_wood);
+
+
+
+
+
 	
 
 	
@@ -560,7 +816,7 @@ int WINAPI WinMain(HINSTANCE	hInstance,			// Instance
 	}
 
 	// Create Our OpenGL Window
-	if (!CreateGLWindow("Example", 640, 480, 16, fullscreen))
+	if (!CreateGLWindow("Mall", 800, 750, 16, fullscreen))
 	{
 		return 0;									// Quit If Window Was Not Created
 	}

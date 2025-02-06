@@ -10,6 +10,8 @@
 #include "Resturant.h"
 #include "backgorund.h"
 
+#define M_PI 3.14159265359
+
 
 
 
@@ -171,3 +173,5 @@ void drawChocolateFountain(int stoneTextureID) {
     // رسم البئر في الأسفل
     drawWellImproved(0, 0, -10, 1.5, 2,stoneTextureID);
 }
+
+

@@ -1,0 +1,3 @@
+extern void corridor(float corridorLength, float corridorWidth, float corridorHeight, float doorWidth, float doorHeight, float x, float y,float z, int wallImage, int floorImage, int ceilImage);
+extern void drawFloor(float corridorWidth, float corridorLength, float x, float y, float z, int image);
+extern void drawFloorStretch(float corridorWidth, float corridorLength, float x, float y, float z, int image);

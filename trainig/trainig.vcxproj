@@ -64,19 +64,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="background.cpp" />
+    <ClCompile Include="corridor.cpp" />
     <ClCompile Include="Decore.cpp" />
+    <ClCompile Include="display_library.cpp" />
+    <ClCompile Include="display_rectangular_parallelepiped.cpp" />
+    <ClCompile Include="ElectronicsStore.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mall.cpp" />
+    <ClCompile Include="mall_lobby.cpp" />
     <ClCompile Include="Model_3DS.cpp" />
+    <ClCompile Include="point.cpp" />
     <ClCompile Include="Resturant.cpp" />
+    <ClCompile Include="staircase.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="backgorund.h" />
+    <ClInclude Include="corridor.h" />
     <ClInclude Include="Decore.h" />
+    <ClInclude Include="display_library.h" />
+    <ClInclude Include="display_rectangular_parallelepiped.h" />
+    <ClInclude Include="ElectronicsStore.h" />
     <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="mall.h" />
+    <ClInclude Include="mall_lobby.h" />
     <ClInclude Include="Model_3DS.h" />
+    <ClInclude Include="point.h" />
     <ClInclude Include="Resturant.h" />
+    <ClInclude Include="staircase.h" />
     <ClInclude Include="texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

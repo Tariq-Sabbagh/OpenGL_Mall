@@ -1,4 +1,4 @@
-
+﻿
 #include "GLTexture.h"
 
 #include <stdio.h>
@@ -56,6 +56,7 @@ void GLTexture::Use()
 
 void GLTexture::LoadBMP(char *name)
 {
+
 	// Create a place to store the texture
 	AUX_RGBImageRec *TextureImage[1];
 
